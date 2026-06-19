@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa de Benefícios iFood 2026 — Resultados</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #F5F5F5;
+    color: #1a1a1a;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #EA1D2C 0%, #c41420 100%);
+    color: #fff;
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .ifood-logo {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ifood-logo .dot { color: #FF6900; }
+  .header h1 {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 16px;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  .header .date-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ── Layout ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 36px 24px; }
+
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #EA1D2C;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon { font-size: 20px; }
+
+  /* ── Card ── */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 24px;
+  }
+
+  /* ── KPI Cards ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .kpi-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 4px solid #EA1D2C;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.11); }
+  .kpi-icon { font-size: 28px; margin-bottom: 4px; }
+  .kpi-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: #EA1D2C;
+    line-height: 1;
+  }
+  .kpi-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+  }
+  .kpi-delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #e8f5e9;
+    color: #00A651;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+    width: fit-content;
+  }
+
+  /* ── Satisfaction Bars ── */
+  .sat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 750px) { .sat-grid { grid-template-columns: 1fr; } }
+  .sat-block { }
+  .sat-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #1a1a1a;
+  }
+  .sat-row { margin-bottom: 14px; }
+  .sat-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 5px;
+  }
+  .sat-label-row .sat-label { font-weight: 600; }
+  .sat-label-row .sat-count { color: #888; }
+  .bar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+  }
+  .bar-excelente { background: #00A651; }
+  .bar-bom       { background: #2196F3; }
+  .bar-regular   { background: #FF6900; }
+  .bar-ruim      { background: #EA1D2C; }
+  .bar-pessimo   { background: #aaa; }
+
+  /* ── YoY Table ── */
+  .yoy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .yoy-table th {
+    background: #EA1D2C;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .yoy-table th:nth-child(2),
+  .yoy-table th:nth-child(3),
+  .yoy-table th:nth-child(4) { text-align: center; }
+  .yoy-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .yoy-table tr:last-child td { border-bottom: none; }
+  .yoy-table td:nth-child(2),
+  .yoy-table td:nth-child(3) { text-align: center; font-weight: 600; color: #444; }
+  .yoy-table td:nth-child(4) { text-align: center; }
+  .yoy-table tr:nth-child(even) td { background: #fafafa; }
+  .var-pos {
+    color: #00A651;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .var-neg { color: #EA1D2C; font-weight: 800; }
+
+  /* ── Ranking ── */
+  .ranking-list { list-style: none; }
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .ranking-item:last-child { border-bottom: none; }
+  .rank-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #EA1D2C;
+    min-width: 36px;
+    text-align: center;
+    line-height: 1;
+  }
+  .rank-num.rank-1 { color: #EA1D2C; }
+  .rank-num.rank-2 { color: #FF6900; }
+  .rank-num.rank-3 { color: #888; }
+  .rank-content { flex: 1; }
+  .rank-name { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .rank-bar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .rank-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #EA1D2C, #FF6900);
+    border-radius: 6px;
+  }
+  .rank-pct { font-size: 13px; color: #888; }
+  .rank-votes { font-size: 13px; font-weight: 700; color: #EA1D2C; margin-left: auto; white-space: nowrap; }
+
+  /* ── Knowledge donut-style ── */
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 750px) { .knowledge-grid { grid-template-columns: 1fr; } }
+  .donut-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .donut-chart {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #00A651 0deg 150.84deg,
+      #2196F3 150.84deg 321.84deg,
+      #FF6900 321.84deg 355.08deg,
+      #EA1D2C 355.08deg 360deg
+    );
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .donut-hole {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .donut-hole .donut-pct { font-size: 20px; font-weight: 900; color: #EA1D2C; }
+  .donut-hole .donut-lbl { font-size: 9px; font-weight: 600; color: #888; text-align: center; line-height: 1.2; }
+  .knowledge-legend { display: flex; flex-direction: column; gap: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .legend-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-text { font-size: 14px; color: #333; }
+  .legend-pct { font-weight: 700; color: #1a1a1a; margin-left: 4px; }
+  .insight-card {
+    background: linear-gradient(135deg, #fff8e1, #fff3cd);
+    border-left: 4px solid #FF6900;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #5a3a00;
+    font-weight: 500;
+  }
+  .insight-card .insight-icon { font-size: 20px; margin-bottom: 6px; }
+
+  /* ── Qualitative bars ── */
+  .qual-list { display: flex; flex-direction: column; gap: 14px; }
+  .qual-row { display: flex; align-items: center; gap: 14px; }
+  .qual-label { font-size: 14px; font-weight: 600; min-width: 200px; color: #333; }
+  .qual-bar-wrap { flex: 1; }
+  .qual-bar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
+    height: 12px;
+    overflow: hidden;
+  }
+  .qual-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #EA1D2C, #FF6900);
+  }
+  .qual-pct { font-size: 13px; font-weight: 700; color: #444; min-width: 40px; }
+  .badge {
+    display: inline-block;
+    border-radius: 12px;
+    padding: 2px 9px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-red { background: #fde8e8; color: #EA1D2C; }
+  .badge-green { background: #e8f5e9; color: #00A651; }
+  .badge-orange { background: #fff3e0; color: #FF6900; }
+  .badge-gray { background: #f5f5f5; color: #666; }
+
+  /* ── Verbatim quotes ── */
+  .verbatim-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .verbatim-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 20px;
+    border-top: 3px solid #EA1D2C;
+  }
+  .verbatim-quote {
+    font-size: 14px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    position: relative;
+    padding-left: 20px;
+  }
+  .verbatim-quote::before {
+    content: '\201C';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-size: 32px;
+    color: #EA1D2C;
+    line-height: 1;
+    font-style: normal;
+  }
+  .verbatim-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #fde8e8;
+    color: #EA1D2C;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ── Recommendations ── */
+  .rec-grid { display: flex; flex-direction: column; gap: 16px; }
+  .rec-card {
+    border-radius: 10px;
+    padding: 20px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .rec-high {
+    background: #fde8e8;
+    border-left: 5px solid #EA1D2C;
+  }
+  .rec-medium {
+    background: #fff3e0;
+    border-left: 5px solid #FF6900;
+  }
+  .rec-priority {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .rec-priority-high { background: #EA1D2C; color: #fff; }
+  .rec-priority-medium { background: #FF6900; color: #fff; }
+  .rec-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ccc;
+    line-height: 1;
+    min-width: 30px;
+  }
+  .rec-high .rec-num { color: #EA1D2C; }
+  .rec-medium .rec-num { color: #FF6900; }
+  .rec-body { flex: 1; }
+  .rec-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+  .rec-desc { font-size: 14px; color: #555; line-height: 1.5; }
+
+  /* ── Footer ── */
+  footer {
+    background: #1a1a1a;
+    color: #bbb;
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── Utility ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 750px) { .two-col { grid-template-columns: 1fr; } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.4s ease both; }
+
+  .tag-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="ifood-logo">iFood<span class="dot">●</span></div>
+    <h1>Pesquisa de Benefícios · Resultados 2026</h1>
+    <p class="subtitle">Análise comparativa 2025 vs 2026 · 1.648 respondentes</p>
+    <span class="date-badge">📅 Junho 2026</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ═══════════════════════ SEÇÃO 1 — KPIs ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">📊</span> Indicadores Principais</h2>
+    <div class="kpi-grid">
+
+      <div class="kpi-card">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-value">1.648</div>
+        <div class="kpi-label">Respondentes</div>
+        <span class="kpi-delta">↑ +15,6% vs 2025</span>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-value">93,1%</div>
+        <div class="kpi-label">Aprovação Beneflex</div>
+        <span class="kpi-delta">↑ +1,5pp vs 2025</span>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon">🎁</div>
+        <div class="kpi-value">86,0%</div>
+        <div class="kpi-label">Aprovação Pacote</div>
+        <span class="kpi-delta">↑ +2,4pp vs 2025</span>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon">🏆</div>
+        <div class="kpi-value">46,1%</div>
+        <div class="kpi-label">"Excelente" Pacote</div>
+        <span class="kpi-delta">↑ +9,1pp vs 2025</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 2 — SATISFAÇÃO ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">😊</span> Satisfação Detalhada</h2>
+    <div class="card">
+      <div class="sat-grid">
+
+        <!-- Beneflex -->
+        <div class="sat-block">
+          <div class="sat-title">⭐ Formato Beneflex</div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Excelente</span>
+              <span class="sat-count">59,8% · 986 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-excelente" style="width:59.8%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Bom</span>
+              <span class="sat-count">33,3% · 549 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-bom" style="width:33.3%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Regular</span>
+              <span class="sat-count">5,9% · 98 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-regular" style="width:5.9%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Ruim</span>
+              <span class="sat-count">0,7% · 12 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-ruim" style="width:0.7%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Péssimo</span>
+              <span class="sat-count">0,2% · 3 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-pessimo" style="width:0.2%"></div></div>
+          </div>
+        </div>
+
+        <!-- Pacote Geral -->
+        <div class="sat-block">
+          <div class="sat-title">🎁 Pacote Geral de Benefícios</div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Excelente</span>
+              <span class="sat-count">46,1% · 759 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-excelente" style="width:46.1%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Bom</span>
+              <span class="sat-count">40,0% · 659 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-bom" style="width:40%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Regular</span>
+              <span class="sat-count">12,0% · 197 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-regular" style="width:12%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Ruim</span>
+              <span class="sat-count">1,8% · 29 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-ruim" style="width:1.8%"></div></div>
+          </div>
+
+          <div class="sat-row">
+            <div class="sat-label-row">
+              <span class="sat-label">Péssimo</span>
+              <span class="sat-count">0,2% · 4 respostas</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill bar-pessimo" style="width:0.2%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 3 — COMPARAÇÃO ANO A ANO ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">📈</span> Comparação Ano a Ano</h2>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="yoy-table">
+        <thead>
+          <tr>
+            <th>Indicador</th>
+            <th>2025</th>
+            <th>2026</th>
+            <th>Variação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Beneflex — Excelente</td>
+            <td>51,9%</td>
+            <td>59,8%</td>
+            <td><span class="var-pos">↑ +7,9pp</span></td>
+          </tr>
+          <tr>
+            <td>Beneflex — Aprovação (Bom+Excelente)</td>
+            <td>91,6%</td>
+            <td>93,1%</td>
+            <td><span class="var-pos">↑ +1,6pp</span></td>
+          </tr>
+          <tr>
+            <td>Pacote — Excelente</td>
+            <td>36,9%</td>
+            <td>46,1%</td>
+            <td><span class="var-pos">↑ +9,1pp</span></td>
+          </tr>
+          <tr>
+            <td>Pacote — Aprovação (Bom+Excelente)</td>
+            <td>83,6%</td>
+            <td>86,0%</td>
+            <td><span class="var-pos">↑ +2,4pp</span></td>
+          </tr>
+          <tr>
+            <td>Conhecimento Alto/Bom</td>
+            <td>84,9%</td>
+            <td>89,4%</td>
+            <td><span class="var-pos">↑ +4,5pp</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 4 — RANKING BENEFÍCIOS ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">❤️</span> O que os FoodLovers mais valorizam</h2>
+    <div class="card">
+      <ul class="ranking-list">
+
+        <li class="ranking-item">
+          <div class="rank-num rank-1">1</div>
+          <div class="rank-content">
+            <div class="rank-name">🏥 Plano de Saúde</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:100%"></div></div>
+            <div class="rank-pct">56,4% · 929 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">56,4%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num rank-2">2</div>
+          <div class="rank-content">
+            <div class="rank-name">🍽️ Vale Alimentação / Refeição</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:66.7%"></div></div>
+            <div class="rank-pct">37,6% · 620 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">37,6%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num rank-3">3</div>
+          <div class="rank-content">
+            <div class="rank-name">🛡️ Seguro de Vida</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:2.5%"></div></div>
+            <div class="rank-pct">1,4% · 23 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">1,4%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num" style="color:#aaa">4</div>
+          <div class="rank-content">
+            <div class="rank-name">🎭 Cultura</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:1.2%"></div></div>
+            <div class="rank-pct">0,7% · 12 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">0,7%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num" style="color:#aaa">5</div>
+          <div class="rank-content">
+            <div class="rank-name">🚗 Mobilidade</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:0.9%"></div></div>
+            <div class="rank-pct">0,5% · 8 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">0,5%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num" style="color:#aaa">6</div>
+          <div class="rank-content">
+            <div class="rank-name">🦷 Plano Odontológico</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:0.7%"></div></div>
+            <div class="rank-pct">0,4% · 7 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">0,4%</div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 5 — RANKING PARCERIAS ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">🤝</span> Parcerias e Facilidades mais desejadas</h2>
+    <div class="card">
+      <ul class="ranking-list">
+
+        <li class="ranking-item">
+          <div class="rank-num rank-1">1</div>
+          <div class="rank-content">
+            <div class="rank-name">🏠 Modelo Híbrido Flexível</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:100%"></div></div>
+            <div class="rank-pct">48,9% · 806 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">48,9%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num rank-2">2</div>
+          <div class="rank-content">
+            <div class="rank-name">💪 Academia</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:36%"></div></div>
+            <div class="rank-pct">17,6% · 290 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">17,6%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num rank-3">3</div>
+          <div class="rank-content">
+            <div class="rank-name">👶 Auxílio Creche</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:20.7%"></div></div>
+            <div class="rank-pct">10,1% · 167 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">10,1%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num" style="color:#aaa">4</div>
+          <div class="rank-content">
+            <div class="rank-name">📚 Plataforma de Educação</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:13.7%"></div></div>
+            <div class="rank-pct">6,7% · 110 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">6,7%</div>
+        </li>
+
+        <li class="ranking-item">
+          <div class="rank-num" style="color:#aaa">5</div>
+          <div class="rank-content">
+            <div class="rank-name">🏥 iDoc</div>
+            <div class="rank-bar-track"><div class="rank-bar-fill" style="width:12.7%"></div></div>
+            <div class="rank-pct">6,2% · 102 votos na 1ª posição</div>
+          </div>
+          <div class="rank-votes">6,2%</div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 6 — CONHECIMENTO DO PACOTE ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">🧠</span> Quanto os FoodLovers conhecem o pacote?</h2>
+    <div class="card">
+      <div class="knowledge-grid">
+
+        <div class="donut-container">
+          <div style="text-align:center">
+            <div class="donut-chart">
+              <div class="donut-hole">
+                <span class="donut-pct">89,4%</span>
+                <span class="donut-lbl">conhecem bem</span>
+              </div>
+            </div>
+            <p style="font-size:12px;color:#888;margin-top:12px;">Conheço muito bem + razoavelmente</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="knowledge-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#00A651"></div>
+              <span class="legend-text">Conheço muito bem <strong class="legend-pct">41,9%</strong></span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#2196F3"></div>
+              <span class="legend-text">Conheço razoavelmente <strong class="legend-pct">47,5%</strong></span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#FF6900"></div>
+              <span class="legend-text">Conheço apenas alguns <strong class="legend-pct">9,5%</strong></span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#EA1D2C"></div>
+              <span class="legend-text">Conheço pouco / Não conheço <strong class="legend-pct">1,0%</strong></span>
+            </div>
+          </div>
+
+          <div class="insight-card">
+            <div class="insight-icon">💡</div>
+            <strong>Correlação positiva detectada:</strong> FoodLovers que conhecem mais o pacote têm satisfação <strong>15% maior</strong> — investir em comunicação tem ROI direto na percepção de valor.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 7 — FEEDBACK QUALITATIVO ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">💬</span> Principais temas no feedback livre</h2>
+    <div class="card">
+
+      <div class="qual-list">
+
+        <div class="qual-row">
+          <div class="qual-label">🍽️ VR/VA Alimentação</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="qual-pct">48,6%</div>
+          <span class="badge badge-red">↑ +20,2pp</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">🔄 Flexibilidade/Beneflex</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:68.7%"></div></div>
+          </div>
+          <div class="qual-pct">33,4%</div>
+          <span class="badge badge-orange">↑ +12,6pp</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">💸 Custos/Valores</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:56%"></div></div>
+          </div>
+          <div class="qual-pct">27,2%</div>
+          <span class="badge badge-red">↑ +14,7pp</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">🏥 Plano de Saúde</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:46.9%"></div></div>
+          </div>
+          <div class="qual-pct">22,8%</div>
+          <span class="badge badge-orange">↑ +6,5pp</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">😊 Positivo/Satisfação</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:35.2%"></div></div>
+          </div>
+          <div class="qual-pct">17,1%</div>
+          <span class="badge badge-green">✓ Positivo</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">👶 Auxílio Creche</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:18.9%"></div></div>
+          </div>
+          <div class="qual-pct">9,2%</div>
+          <span class="badge badge-gray">—</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">🚗 Mobilidade/Combustível</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:14%"></div></div>
+          </div>
+          <div class="qual-pct">6,8%</div>
+          <span class="badge badge-gray">—</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">🐾 Pet</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:12.3%"></div></div>
+          </div>
+          <div class="qual-pct">6,0%</div>
+          <span class="badge badge-gray">—</span>
+        </div>
+
+        <div class="qual-row">
+          <div class="qual-label">💰 Previdência/Financeiro</div>
+          <div class="qual-bar-wrap">
+            <div class="qual-bar-track"><div class="qual-bar-fill" style="width:11.7%"></div></div>
+          </div>
+          <div class="qual-pct">5,7%</div>
+          <span class="badge badge-gray">—</span>
+        </div>
+
+      </div>
+
+      <!-- Verbatins -->
+      <div class="verbatim-grid">
+
+        <div class="verbatim-card">
+          <p class="verbatim-quote">Quero aumento de VR — VA/VR incompatível com a realidade de preço das coisas</p>
+          <span class="verbatim-tag">🍽️ Tema: Alimentação</span>
+        </div>
+
+        <div class="verbatim-card">
+          <p class="verbatim-quote">A questão da coparticipação no plano de saúde tem sido uma dor</p>
+          <span class="verbatim-tag">🏥 Tema: Saúde</span>
+        </div>
+
+        <div class="verbatim-card">
+          <p class="verbatim-quote">Algumas empresas têm plano de aposentadoria privada, sinto falta aqui</p>
+          <span class="verbatim-tag">💰 Tema: Financeiro</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SEÇÃO 8 — RECOMENDAÇÕES ═══════════════════════ -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">🎯</span> Recomendações Estratégicas</h2>
+    <div class="rec-grid">
+
+      <!-- ALTA -->
+      <div class="rec-card rec-high">
+        <div class="rec-num">1</div>
+        <div class="rec-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="rec-title">Revisar VR/VA</div>
+            <span class="rec-priority rec-priority-high">ALTA</span>
+          </div>
+          <div class="rec-desc">Benchmarking de mercado com reajuste dos valores, desvinculação dos pontos Beneflex e comunicação clara de como utilizar VR/VA de forma otimizada.</div>
+        </div>
+      </div>
+
+      <div class="rec-card rec-high">
+        <div class="rec-num">2</div>
+        <div class="rec-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="rec-title">Endereçar custo do Plano de Saúde</div>
+            <span class="rec-priority rec-priority-high">ALTA</span>
+          </div>
+          <div class="rec-desc">Revisão do modelo de coparticipação, subsídio maior especialmente para planos família e campanha de comunicação sobre o real valor do benefício vs. custo de mercado.</div>
+        </div>
+      </div>
+
+      <div class="rec-card rec-high">
+        <div class="rec-num">3</div>
+        <div class="rec-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="rec-title">Intensificar comunicação do pacote</div>
+            <span class="rec-priority rec-priority-high">ALTA</span>
+          </div>
+          <div class="rec-desc">Programa de onboarding de benefícios nos primeiros 90 dias + Mês dos Benefícios anual com conteúdos educativos — correlação direta com satisfação (+15%).</div>
+        </div>
+      </div>
+
+      <!-- MÉDIA -->
+      <div class="rec-card rec-medium">
+        <div class="rec-num">4</div>
+        <div class="rec-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="rec-title">Otimizar Auxílio Home Office</div>
+            <span class="rec-priority rec-priority-medium">MÉDIA</span>
+          </div>
+          <div class="rec-desc">Ampliar rede de aceite, incluir mais estabelecimentos e categorias, e revisar o valor do auxílio com base na realidade de custo de infraestrutura doméstica.</div>
+        </div>
+      </div>
+
+      <div class="rec-card rec-medium">
+        <div class="rec-num">5</div>
+        <div class="rec-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="rec-title">Fortalecer bem-estar e saúde mental</div>
+            <span class="rec-priority rec-priority-medium">MÉDIA</span>
+          </div>
+          <div class="rec-desc">Reforço no subsídio de academia/atividade física e ampliação do acesso ao apoio psicológico — diferenciais cada vez mais valorizados no mercado de benefícios.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <p><strong>Pesquisa de Benefícios iFood 2026 · Resultados Preliminares</strong></p>
+  <p>Dados: 1.648 respondentes (2026) · 1.426 respondentes (2025)</p>
+  <p>Gerado em Junho 2026 · Uso interno — Equipe de Benefícios iFood</p>
+</footer>
+
+</body>
+</html>
